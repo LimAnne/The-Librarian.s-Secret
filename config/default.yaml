@@ -1,0 +1,7 @@
+pdf_dir: "./books" # should contain all data files required by data processing pipeline
+processed_dataset_path: "./processed" # should contain all data files required by datasets
+model_save_path: "./models"
+
+device: -1 # -1 for cpu, 0, 1, 2, ... for specific GPU IDs
+
+seed: 42 # Seed value for reproducibility. Set to false to disable seeding.
