@@ -1,4 +1,4 @@
-### Project Motivation: Continuing Terry Pratchett’s Legacy Through AI
+## Project Motivation: Continuing Terry Pratchett’s Legacy Through AI
 
 Terry Pratchett's passing in 2015 marked the loss of one of the greatest literary voices of our time. His works were more than just stories—they were windows into human nature, wrapped in satire, humor, and profound wisdom. He had a unique ability to hold up a mirror to society, showing us our absurdities while reminding us of our potential for kindness, courage, and change.
 
@@ -12,11 +12,11 @@ Because, as Pratchett himself wrote:
 
 *“And what would humans be without love?" RARE, said Death. (Reaper Man)*
 
-#### The first step - Exploring themes of Discworld through Topic Modeling
+### The first step - Exploring themes of Discworld through Topic Modeling
 If you are new to Discworld, topic_modeling.ipynb explores the use of Latent Dirichlet Allocation (LDA) as a tool for topic modeling. Text is extracted from pdf copies of his books and processed with NLP techniques (cleaning, tokenization, lemmatization with POS tagging..etc). 
 It attempts to uncover the major themes in Discworld, and it will be interesting to see if we can get an accurate modeling. 
 For copyright reasons, the books are not pushed to this repo.
 
-#### Next steps - Converting text into embeddings for RAG and using an LLM to generate new adventures (in-progress)
+### Next steps - Converting text into embeddings for RAG and using an LLM to generate new adventures (in-progress)
 This is still in-progress. This step is most exciting for me, so let's see what comes out of this..soon!
 
