@@ -20,3 +20,5 @@ It attempts to uncover the major themes in Discworld, and it will be interesting
 ### Next steps - Converting text into embeddings for RAG and using an LLM to generate new adventures (in-progress)
 This is still in-progress. This step is most exciting for me, so let's see what comes out of this..soon!
 
+Update: main.py now has text-extraction, chunking, text embedding generation and storing in vector store. RAG pipeline is set up, and results will be posted soon.
+
