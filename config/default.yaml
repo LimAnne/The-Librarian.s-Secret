@@ -1,7 +1,12 @@
 pdf_dir: "./books" # should contain all data files required by data processing pipeline
-processed_dataset_path: "./processed" # should contain all data files required by datasets
+embeddings_path: "./embeddings" # should contain all data files required by datasets
 model_save_path: "./models"
 
-device: -1 # -1 for cpu, 0, 1, 2, ... for specific GPU IDs
+extract_text: False # Set to True if text extraction is required
+chunk_text: False # Set to True if text chunking is required
+create_embeddings: False # Set to False if embeddings are already created
+load_embeddings: True # Set to True if embeddings are already created
 
+device: 0 # -1 for cpu, 0, 1, 2, ... for specific GPU IDs
+embedding_model: all-MiniLM-L6-v2 # Open-source embedding model from HuggingFace
 seed: 42 # Seed value for reproducibility. Set to false to disable seeding.
