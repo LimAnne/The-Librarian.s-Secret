@@ -5,15 +5,17 @@ import torch
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceInstructEmbeddings
-from sentence_transformers import SentenceTransformer
-import openai
-from dotenv import load_dotenv
+# from sentence_transformers import SentenceTransformer
+# import openai
+# from dotenv import load_dotenv
 import os
 import yaml
 import re
-from prompts.prompt_template import PROMPT
+from utils.prompt_template import PROMPT
+from utils.main_utils import process_llm_response
 from langchain.chains import RetrievalQA
-from langchain.llms import LlamaCpp
+from langchain_community.llms import CTransformers
+# from langchain_community.cache import SQLiteCache
 
 # === STEP 1: Extract Text from PDFs ===
 def extract_text_from_pdfs(pdf_directory):
@@ -77,9 +79,10 @@ def load_embeddings(embedding_model, embeddings_path, device):
     vectordb = FAISS.load_local(embeddings_path + '/faiss_index', embeddings, allow_dangerous_deserialization=True)
     print("FAISS index loaded successfully!")
 
+    search_type = 'creatures'
     ### test if vector DB was loaded correctly
-    results = vectordb.similarity_search('creatures', top_k=3)
-    print("🔍 Top 3 Most Similar Results:")
+    results = vectordb.similarity_search(search_type, top_k=3)
+    print(f"🔍 Top 3 Most Similar Results for similarity search for {search_type}:")
     for i, doc in enumerate(results):
         cleaned_text = clean_text(doc.page_content)
         print(f"Result {i+1}: {cleaned_text[:200]}...")
@@ -91,44 +94,49 @@ def clean_text(text):
     text = text.strip()  # Remove leading/trailing spaces
     return text
 
-# # === STEP 4: Search in FAISS-GPU ===
-# def search_faiss_gpu(query, index, embeddings, chunks, model, top_k=3):
-#     query_embedding = np.array([model.encode(query)], dtype="float32")
-#     distances, indices = index.search(query_embedding, top_k)
-#     return [chunks[i] for i in indices[0]]
-
 def retrieval_chain(vectordb):
-    llm = LlamaCpp(
-        model_path="./download/mistral-7b-instruct.Q4_K_M.gguf",  
-        n_gpu_layers=35,  # Optimize for RTX 3050
-        n_batch=512,  # Adjust for performance
-        temperature=0.1,  # Lower temp for better factual responses
-        max_tokens=512,
-        verbose=True  # Set to False in production
+# Load CUDA-compatible local LLM using ctransformers
+    llm = CTransformers(
+        model="C:\\Users\\Liman\\Downloads\\ask_terry\\.huggingface\\download\\mistral-7b-instruct-v0.2.Q4_K_M.gguf", 
+        model_type="mistral",
+        config={
+            "gpu_layers": 20,      # gpu usage, adjust as needed
+            "temperature": 0,      
+            "max_new_tokens": 800, # 
+            "context_length": 2048, # 
+            "batch_size": 16       # Adjust batch size to avoid memory issues
+        }
     )
-
-    retriever = vectordb.as_retriever(search_kwargs={"k": 5, "search_type": "similarity"})
+    retriever = vectordb.as_retriever(search_kwargs={"k": 3, "search_type": "similarity"})
+    
     qa_chain = RetrievalQA.from_chain_type(
-    llm=llm,
+    llm=llm,  
     chain_type="stuff",
     retriever=retriever,
     chain_type_kwargs={"prompt": PROMPT},
     return_source_documents=True,
-    verbose=False
-)
-    
-    question = "What does Rincewind like to do when faced with danger?"
-    # Perform retrieval and generate the answer
-    result = qa_chain.invoke({"query": question})
+    verbose=True
+    )
 
-    # Print the response
-    print("\n🤖 Answer:", result["result"])
+    # # Enable caching
+    # qa_chain.cache = SQLiteCache(database_path="./cache.db")
+
+    question = "Tell me about Rincewind's luggage."
     
-    # If you want to see retrieved documents
-    print("\n📚 Retrieved Documents:")
-    for doc in result["source_documents"]:
-        print("-" * 40)
-        print(doc.page_content)
+    # Retrieve context and generate the answer
+    result = qa_chain.invoke({"query": question})
+    ans = process_llm_response(result)
+
+    # for source in result.get("source_documents", []):
+    #     print(source.metadata)
+    print(f"Query: {question}")
+    print("\n🤖 Final Answer:", result["result"] + ans)
+    
+    # # Show retrieved documents for debugging
+    # print("\n📚 Retrieved Documents:")
+    # for doc in result["source_documents"]:
+    #     print("-" * 40)
+    #     print(doc.page_content[:500] + "...")  
 
     return result
 
@@ -146,6 +154,7 @@ if __name__ == "__main__":
 
     # load_dotenv()
     # openai.api_key = os.getenv("OPENAI_API_KEY")
+
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     if config["extract_text"]:
