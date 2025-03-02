@@ -22,10 +22,6 @@ It attempts to uncover the major themes in Discworld, and it will be interesting
 
 ### Next steps - Converting text into embeddings for RAG and using an LLM to generate new adventures (in-progress)
 
-**src/main.py** 
-
-executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs.
-
 **RAG applications** 
 
 typically have 2 main components, **indexing**, and **retrieval and generation**. The diagrams below are created to illustrate the process.
