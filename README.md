@@ -35,6 +35,13 @@ In this application, we leverage CUDA-enabled code to harness the power of the G
 
 <img src="images/Processdiagrams.png" width="800" height="500" style="float:left; margin-right:10px;" />
 
+**main.py** executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs.
+
+To run main.py, run 'python src/main.py'.
+A successful RAG output is appended here as an image. Here, the LLM outputs a summary of the retrieved information about the luggage, which is quite accurate!
+
+<img src="images/RAG_output.png" width="1200" height="250" style="float:left; margin-right:10px;" />
+
 *llm fine-tuning is a work-in-progress, we should see updates very soon!*
 
 
