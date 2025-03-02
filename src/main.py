@@ -48,7 +48,7 @@ def chunk_text(all_docs):
 
     return chunks
 
-# === STEP 3: Create Embeddings and Store in FAISS-GPU ===
+# === STEP 3: Create Embeddings and persist in vector store ===
 def create_embeddings(chunks, embedding_model, device):
 
     print(f"Using device: {device}")
