@@ -101,7 +101,7 @@ def retrieval_chain(vectordb):
         model_type="mistral",
         config={
             "gpu_layers": 20,      # gpu usage, adjust as needed
-            "temperature": 0,      
+            "temperature": 0.2,      
             "max_new_tokens": 800, # 
             "context_length": 2048, # 
             "batch_size": 16       # Adjust batch size to avoid memory issues
@@ -121,7 +121,7 @@ def retrieval_chain(vectordb):
     # # Enable caching
     # qa_chain.cache = SQLiteCache(database_path="./cache.db")
 
-    question = "Tell me about Rincewind's luggage."
+    question = "Tell me about Rincewind's Luggage. What does it look like and how does it behave?"
     
     # Retrieve context and generate the answer
     result = qa_chain.invoke({"query": question})
