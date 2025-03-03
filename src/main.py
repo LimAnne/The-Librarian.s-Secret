@@ -82,7 +82,7 @@ def load_embeddings(embedding_model, embeddings_path, device):
     search_type = 'creatures'
     ### test if vector DB was loaded correctly
     results = vectordb.similarity_search(search_type, top_k=3)
-    print(f"🔍 Top 3 Most Similar Results for similarity search for {search_type}:")
+    print(f"🔍 Testing the vector source. Provide top 3 most similar results for: {search_type}")
     for i, doc in enumerate(results):
         cleaned_text = clean_text(doc.page_content)
         print(f"Result {i+1}: {cleaned_text[:200]}...")
@@ -101,13 +101,15 @@ def retrieval_chain(vectordb):
         model_type="mistral",
         config={
             "gpu_layers": 20,      # gpu usage, adjust as needed
-            "temperature": 0.2,      
-            "max_new_tokens": 800, # 
+            "temperature": 0.1,      
+            "max_new_tokens": 2000, # 
             "context_length": 2048, # 
             "batch_size": 16       # Adjust batch size to avoid memory issues
         }
     )
-    retriever = vectordb.as_retriever(search_kwargs={"k": 3, "search_type": "similarity"})
+    question = "Describe Rincewind's Luggage in full detail, including its physical appearance, abilities, and behavior. Provide examples from different books."
+    
+    retriever = vectordb.as_retriever(search_kwargs={"k": 5, "search_type": "similarity"})
     
     qa_chain = RetrievalQA.from_chain_type(
     llm=llm,  
@@ -120,9 +122,7 @@ def retrieval_chain(vectordb):
 
     # # Enable caching
     # qa_chain.cache = SQLiteCache(database_path="./cache.db")
-
-    question = "Tell me about Rincewind's Luggage. What does it look like and how does it behave?"
-    
+            
     # Retrieve context and generate the answer
     result = qa_chain.invoke({"query": question})
     ans = process_llm_response(result)
@@ -131,14 +131,20 @@ def retrieval_chain(vectordb):
     #     print(source.metadata)
     print(f"Query: {question}")
     print("\n🤖 Final Answer:", result["result"] + ans)
-    
+
     # # Show retrieved documents for debugging
     # print("\n📚 Retrieved Documents:")
     # for doc in result["source_documents"]:
     #     print("-" * 40)
     #     print(doc.page_content[:500] + "...")  
 
-    return result
+    # compare answer with no RAG`
+    print("\n🔍 Running **Without Retrieval (No-RAG)**...")
+
+    prompt = f"Answer the following question as accurately as possible:\n\n{question}"
+    no_rag_result = llm.invoke(prompt)
+
+    print(f"\n🤖 No-RAG Answer: {no_rag_result}")
 
 # === MAIN EXECUTION ===
 if __name__ == "__main__":
@@ -174,6 +180,8 @@ if __name__ == "__main__":
 
     print("Creating retrieval chain...")
     retrieval_chain(vectordb)
+    
+
 
     
 

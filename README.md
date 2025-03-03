@@ -20,7 +20,7 @@ If you are new to Discworld, topic_modeling.ipynb explores the use of Latent Dir
 It attempts to uncover the major themes in Discworld, and it will be interesting to see if we can get an accurate modeling. 
 *For copyright reasons, the books are not pushed to this repo.*
 
-### Next steps - Converting text into embeddings for RAG and using an LLM to generate new adventures (in-progress)
+### Next steps - RAG and using an LLM to summarise responses to queries
 
 **RAG applications** 
 
@@ -31,13 +31,29 @@ In this application, we leverage CUDA-enabled code to harness the power of the G
 
 <img src="images/Processdiagrams.png" width="800" height="500" style="float:left; margin-right:10px;" />
 
-**main.py** executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs.
+**main.py** executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs. This is particularly useful if the user wants to run the script multiple times, whether debugging or tuning the parameters of the llm.
+
+### Results: LLM outputs compared using RAG versus without using RAG.
 
 To run main.py, run 'python src/main.py'.
-A successful RAG output is appended here as an image. Here, the LLM outputs a summary of the retrieved information about the luggage, which is quite accurate!
 
-<img src="images/RAG_output.png" width="1200" height="250" style="float:left; margin-right:10px;" />
+A successful RAG output is appended here as an image. 
 
+**With RAG**
+
+The LLM outputs a summary of the retrieved information about the luggage, which we know to be quite accurate, such as the physical appearance of the Luggage (large brassbound chest) and it being able to move around on hundreds of little legs. 
+
+**Without RAG**
+
+When not using RAG, we observe that while the LLM can provide some correct information (such as the fact that The Luggage is sentient and accompanies Rincewind), much of its response is highly inaccurate. A clear example of this is the description of The Luggage as being "made of sapphire-encrusted elephant hide", which is completely false. Another odd claim is that The Luggage tried to eat a unicorn, despite there being no mention of unicorns in The Light Fantastic.
+
+These errors highlight the well-documented tendency of LLMs to hallucinate, generating plausible but entirely false information. In contrast, RAG significantly improves accuracy by grounding the model’s responses in real, retrieved sources, ensuring that its output aligns with the actual text rather than fabricated details.
+
+<img src="images/RAG_output.png" width="1200" height="600" style="float:left; margin-right:10px;" /> 
+
+---
+---
+### LLM fine-tuning
 *llm fine-tuning is a work-in-progress, we should see updates very soon!*
 
 
