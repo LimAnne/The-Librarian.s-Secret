@@ -7,3 +7,8 @@ embeddings/
 
 # Models
 .huggingface/
+
+# pycache
+__pycache__/
+*.pyc
+*.pyo
