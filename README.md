@@ -12,6 +12,8 @@ Because, as Pratchett himself wrote:
 
 *“And what would humans be without love?" RARE, said Death. (Reaper Man)*
 
+---
+
 ### The first step - Exploring themes of Discworld through Topic Modeling
 
 **topic_modeling.ipynb**
@@ -20,10 +22,10 @@ If you are new to Discworld, topic_modeling.ipynb explores the use of Latent Dir
 It attempts to uncover the major themes in Discworld, and it will be interesting to see if we can get an accurate modeling. 
 *For copyright reasons, the books are not pushed to this repo.*
 
+---
 ### Next steps - RAG and using an LLM to summarise responses to queries
 
 **RAG applications** 
-
 typically have 2 main components, **indexing**, and **retrieval and generation**. The diagrams below are created to illustrate the process.
 Indexing is a crucial step, as it organizes chunked text into a searchable format, allowing relevant information to be efficiently retrieved when a query is made.
 
@@ -31,7 +33,8 @@ In this application, we leverage CUDA-enabled code to harness the power of the G
 
 <img src="images/Processdiagrams.png" width="800" height="500" style="float:left; margin-right:10px;" />
 
-**main.py** executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs. This is particularly useful if the user wants to run the script multiple times, whether debugging or tuning the parameters of the llm.
+**main.py** 
+executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs. This is particularly useful if the user wants to run the script multiple times, whether debugging or tuning the parameters of the llm.
 
 ### Results: LLM outputs compared using RAG versus without using RAG.
 
