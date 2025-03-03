@@ -35,6 +35,7 @@ In this application, we leverage CUDA-enabled code to harness the power of the G
 
 **main.py** 
 executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs. This is particularly useful if the user wants to run the script multiple times, whether debugging or tuning the parameters of the llm.
+
 ---
 ### Results: LLM outputs compared using RAG versus without using RAG.
 
