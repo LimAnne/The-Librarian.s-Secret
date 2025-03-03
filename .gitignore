@@ -3,6 +3,7 @@
 
 # Data/books
 *.pdf
+embeddings/
 
 # Models
 .huggingface/
