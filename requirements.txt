@@ -1,0 +1,8 @@
+gensim==4.3.3
+langchain==0.3.19
+langchain_community==0.3.18
+langchain_text_splitters==0.3.6
+matplotlib==3.10.1
+PyYAML==6.0.2
+PyYAML==6.0.2
+torch==2.6.0+cu126
