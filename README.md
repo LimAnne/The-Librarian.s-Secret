@@ -45,11 +45,11 @@ A successful RAG output is appended here as an image.
 
 **With RAG**
 
-The LLM outputs a summary of the retrieved information about the luggage, which we know to be quite accurate, such as the physical appearance of the Luggage (large brassbound chest) and it being able to move around on hundreds of little legs. 
+The LLM outputs a summary of the retrieved information about the luggage, which we know to be quite accurate, such as the physical appearance of the Luggage (large brassbound chest) :heavy_check_mark: and it being able to move around on hundreds of little legs. :heavy_check_mark: Its -ahem- homicidal nature and unexplained loyalty to Rincewind is also true. :heavy_check_mark: The events described are also accurate :heavy_check_mark:
 
 **Without RAG**
 
-When not using RAG, we observe that while the LLM can provide some correct information (such as the fact that The Luggage is sentient and accompanies Rincewind), much of its response is highly inaccurate. A clear example of this is the description of The Luggage as being "made of sapphire-encrusted elephant hide", which is completely false. Another odd claim is that The Luggage tried to eat a unicorn, despite there being no mention of unicorns in The Light Fantastic.
+When not using RAG, we observe that while the LLM can provide some correct information (such as the fact that The Luggage is sentient and accompanies Rincewind), much of its response is highly inaccurate. A clear example of this is the description of The Luggage as being "made of sapphire-encrusted elephant hide" :x:, which is completely false. Another odd claim is that The Luggage tried to eat a unicorn, despite there being no mention of unicorns in The Light Fantastic.:x:
 
 These errors highlight the well-documented tendency of LLMs to hallucinate, generating plausible but entirely false information. In contrast, RAG significantly improves accuracy by grounding the model’s responses in real, retrieved sources, ensuring that its output aligns with the actual text rather than fabricated details.
 
