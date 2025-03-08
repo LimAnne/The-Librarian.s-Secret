@@ -1,6 +1,37 @@
 import matplotlib.pyplot as plt
 import gensim
 from gensim.models import CoherenceModel
+import os
+import fitz
+
+import re
+
+
+# Text extraction from PDFs
+def extract_text_from_pdfs(pdf_directory):
+    text = ""
+
+    # Loop through all files in the directory
+    for filename in os.listdir(pdf_directory):
+        if filename.endswith(".pdf"):  # Ensure only PDFs are processed
+            pdf_path = os.path.join(pdf_directory, filename)
+            print(f"Extracting text from: {filename}")
+
+            with fitz.open(pdf_path) as doc:
+                for page in doc:
+                    text += page.get_text("text") + "\n"
+
+    return text
+
+
+def clean_text(text):
+    """Cleans extracted text by removing special characters, extra spaces, and fixing broken sentences."""
+    text = text.replace("\n", " ")  # Remove newlines
+    text = re.sub(r"\s+", " ", text)  # Remove excessive spaces
+    text = re.sub(r"[^a-zA-Z0-9.,!?;'\-\s]", "", text)  # Remove special characters
+    text = re.sub(r"CHAPTER\s+[A-Z]+", "", text)  # Remove chapter headings
+    text = text.strip()
+    return text
 
 
 # Compute coherence scores across different number of topics
