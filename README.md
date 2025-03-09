@@ -13,6 +13,7 @@ Because, as Pratchett himself wrote:
 *“And what would humans be without love?" RARE, said Death. (Reaper Man)*
 
 ---
+*For copyright reasons, the books are not pushed to this repo.*
 
 ### The first step - Exploring themes of Discworld through Topic Modeling
 
@@ -22,10 +23,10 @@ If you are new to Discworld, topic_modeling.ipynb explores the use of Latent Dir
 It attempts to uncover the major themes in Discworld, and it will be interesting to see if we can get an accurate modeling. 
 pyLDAvis is a handly interactive tool that is explored in this notebook that visualises the topics that have been identified by the LDA model.
 
-<img src="images/circle1.png" width="400" height="250" style="float:left; margin-right:10px;" />
-<img src="images/circle2.png" width="400" height="250" style="display: block; padding-bottom: 20px;" />
-
-*For copyright reasons, the books are not pushed to this repo.*
+<div style="display: flex; gap: 10px;">
+    <img src="images/circle1.png" width="400" height="250" />
+    <img src="images/circle2.png" width="400" height="250" />
+</div>
 
 ---
 ### Anomaly Detection - Which is not like the others? Using an Autoencoder and Visualising Anomalies
@@ -39,12 +40,14 @@ A type of neural network primarily used for unsupervised learning, the autoencod
 
 In **anomaly_detection.ipynb**, our simple autoencoder is trained on the text embeddings of the pdfs, and passed in test embeddings (non-Pratchett like text) to see if it was able to differentiate them. 
 
-We also visualise the text embeddings (Pratchett's original texts versus flagged anomalies) to see how they are different.
+We also visualise the text embeddings (Pratchett's original texts versus flagged anomalies) to see how they are different. Here, we can see that the ones flagged as anomalies are on the outer circumference of the other embeddings.
 
-<img src="images/autoencoder.png" width="300" height="300" style="float:left; margin-right:10px;" />
-<img src="images/autoencoder_embeddings.png" width="300" height="300" style="display: block; margin-bottom: 10px;" />
+<div style="display: flex; gap: 10px; align-items: center;">
+    <img src="images/autoencoder.png" width="300" height="300" />
+    <img src="images/autoencoder_embeddings.png" width="300" height="300" />
+</div>
 
-Factors influencing our anomaly detection model have been summarised in a tabled below. 
+We evaluate the model by curating a few test sentences and paragraphs and passed them into the model. From the results, we determined the factors influencing our anomaly detection model - summarised in a table below. 
 
 <img src="images/influencing_autoencoder.png" width="700" height="400" style="display: block; padding-bottom: 20px;" />
 
@@ -61,26 +64,31 @@ In this application, we leverage CUDA-enabled code to harness the power of the G
 <img src="images/Processdiagrams.png" width="800" height="500" style="display: block; padding-bottom: 20px;" />
 
 **main.py** 
-executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs. This is particularly useful if the user wants to run the script multiple times, whether debugging or tuning the parameters of the llm.
 
----
+main.py executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs. This is particularly useful if the user wants to run the script multiple times, whether debugging or tuning the parameters of the llm.
+
 ### Results: LLM outputs compared using RAG versus without using RAG.
 
-To run main.py, run 'python src/main.py'.
-
-A successful RAG output is appended here as an image. 
+After running main.py, you should get an output that is similar to the image that we have appended here for reference.
 
 **With RAG**
 
-The LLM outputs a summary of the retrieved information about the luggage, which we know to be quite accurate, such as the physical appearance of the Luggage (large brassbound chest) :heavy_check_mark: and it being able to move around on hundreds of little legs. :heavy_check_mark: Its -ahem- homicidal nature and unexplained loyalty to Rincewind is also true. :heavy_check_mark: The events described are also accurate :heavy_check_mark:
+The LLM outputs a summary of the retrieved information about the luggage, which we know to be quite accurate, such as:
+- the physical appearance of the Luggage (large brassbound chest) :heavy_check_mark:
+- it being able to move around on hundreds of little legs. :heavy_check_mark:
+- Its homicidal nature and unexplained loyalty to Rincewind is also true. :heavy_check_mark:
+- The events described are also accurate :heavy_check_mark:
 
 **Without RAG**
 
-When not using RAG, we observe that while the LLM can provide some correct information (such as the fact that The Luggage is sentient and accompanies Rincewind), much of its response is highly inaccurate. A clear example of this is the description of The Luggage as being "made of sapphire-encrusted elephant hide" :x:, which is completely false. Another odd claim is that The Luggage tried to eat a unicorn, despite there being no mention of unicorns in The Light Fantastic.:x:
+When not using RAG, we observe that while the LLM can provide some correct information (such as the fact that The Luggage is sentient and accompanies Rincewind), much of its response is highly inaccurate. A clear example of this is:
+- the description of The Luggage as being "made of sapphire-encrusted elephant hide" :x:, which is completely false.
+- another odd claim is that The Luggage tried to eat a unicorn, despite there being no mention of unicorns in The Light Fantastic. :x:
+- its ability to create a protective bubble around itself in the face of danger is also inaccurate :x:
 
 These errors highlight the well-documented tendency of LLMs to hallucinate, generating plausible but entirely false information. In contrast, RAG significantly improves accuracy by grounding the model’s responses in real, retrieved sources, ensuring that its output aligns with the actual text rather than fabricated details.
 
-<img src="images/RAG_output.png" width="1200" height="600" style="float:left; margin-right:10px;" /> 
+<img src="images/RAG_output.png" width="900" height="600" style="float:left; margin-right:10px;" /> 
 
 ---
 ---
