@@ -49,7 +49,7 @@ We also visualise the text embeddings (Pratchett's original texts versus flagged
 
 We evaluate the model by curating a few test sentences and paragraphs and passed them into the model. From the results, we determined the factors influencing our anomaly detection model - summarised in a table below. 
 
-<img src="images/influencing_autoencoder.png" width="700" height="400" style="display: block; padding-bottom: 20px;" />
+<img src="images/influencing_autoencoder.png" width="600" height="200" style="display: block; padding-bottom: 20px;" />
 
 ---
 
