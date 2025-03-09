@@ -20,9 +20,36 @@ Because, as Pratchett himself wrote:
 
 If you are new to Discworld, topic_modeling.ipynb explores the use of Latent Dirichlet Allocation (LDA) as a tool for topic modeling. Text is extracted from pdf copies of his books and processed with NLP techniques (cleaning, tokenization, lemmatization with POS tagging..etc). 
 It attempts to uncover the major themes in Discworld, and it will be interesting to see if we can get an accurate modeling. 
+pyLDAvis is a handly interactive tool that is explored in this notebook that visualises the topics that have been identified by the LDA model.
+
+<img src="images/circle1.png" width="400" height="250" style="float:left; margin-right:10px;" />
+<img src="images/circle2.png" width="400" height="250" style="display: block; padding-bottom: 20px;" />
+
 *For copyright reasons, the books are not pushed to this repo.*
 
 ---
+### Anomaly Detection - Which is not like the others? Using an Autoencoder and Visualising Anomalies
+
+**anomaly_detection.ipynb**
+
+At this stage, the accuracy of the autoencoder is not the primary objective but rather an exploratory step in understanding how well it distinguishes stylistic anomalies. If successful, we can consider using this as a means to differentiate generated text that is non-Pratchett-like, ensuring that our chatbot only generates Pratchett-like content.
+
+Autoencoders have been used in anomaly detection particularly in cases where anomalies are rare and difficult to label.
+A type of neural network primarily used for unsupervised learning, the autoencoder consists of 2 parts, the encoder and the decoder. The encoder compresses the input data into a lower-dimensional latent representation (bottleneck), and the decoder reconstructs the original input from the latent representation. When the reconstruction error is high, the input is likely an anomaly, because the model detects that it is significantly different from its learnt representations.
+
+In **anomaly_detection.ipynb**, our simple autoencoder is trained on the text embeddings of the pdfs, and passed in test embeddings (non-Pratchett like text) to see if it was able to differentiate them. 
+
+We also visualise the text embeddings (Pratchett's original texts versus flagged anomalies) to see how they are different.
+
+<img src="images/autoencoder.png" width="300" height="300" style="float:left; margin-right:10px;" />
+<img src="images/autoencoder_embeddings.png" width="300" height="300" style="display: block; margin-bottom: 10px;" />
+
+Factors influencing our anomaly detection model have been summarised in a tabled below. 
+
+<img src="images/influencing_autoencoder.png" width="700" height="400" style="display: block; padding-bottom: 20px;" />
+
+---
+
 ### Next steps - RAG and using an LLM to summarise responses to queries
 
 **RAG applications** 
@@ -31,7 +58,7 @@ Indexing is a crucial step, as it organizes chunked text into a searchable forma
 
 In this application, we leverage CUDA-enabled code to harness the power of the GPU, ensuring efficient and accelerated computations. We will be using open-source llms and embedding models to build the chatbot.
 
-<img src="images/Processdiagrams.png" width="800" height="500" style="float:left; margin-right:10px;" />
+<img src="images/Processdiagrams.png" width="800" height="500" style="display: block; padding-bottom: 20px;" />
 
 **main.py** 
 executes the entire RAG flow in a single script, and is designed in a way that enables the user to 'turn off' parts of the code that has completed and no longer needed (for example, after embeddings are generated, there is no need to re-run that step). This can be done by setting the keys in config/default.yaml to true/false based on the current needs. This is particularly useful if the user wants to run the script multiple times, whether debugging or tuning the parameters of the llm.
