@@ -33,9 +33,8 @@ pyLDAvis is a handly interactive tool that is explored in this notebook that vis
 
 **anomaly_detection.ipynb**
 
-At this stage, the accuracy of the autoencoder is not the primary objective but rather an exploratory step in understanding how well it distinguishes stylistic anomalies. If successful, we can consider using this as a means to differentiate generated text that is non-Pratchett-like, ensuring that our chatbot only generates Pratchett-like content.
+Autoencoders have been used in anomaly detection particularly in cases where anomalies are rare and difficult to label. We can consider using this as a means to differentiate generated text that is non-Pratchett-like, ensuring that our chatbot only generates Pratchett-like content.
 
-Autoencoders have been used in anomaly detection particularly in cases where anomalies are rare and difficult to label.
 A type of neural network primarily used for unsupervised learning, the autoencoder consists of 2 parts, the encoder and the decoder. The encoder compresses the input data into a lower-dimensional latent representation (bottleneck), and the decoder reconstructs the original input from the latent representation. When the reconstruction error is high, the input is likely an anomaly, because the model detects that it is significantly different from its learnt representations.
 
 In **anomaly_detection.ipynb**, our simple autoencoder is trained on the text embeddings of the pdfs, and passed in test embeddings (non-Pratchett like text) to see if it was able to differentiate them. 
@@ -50,6 +49,8 @@ We also visualise the text embeddings (Pratchett's original texts versus flagged
 We evaluate the model by curating a few test sentences and paragraphs and passed them into the model. From the results, we determined the factors influencing our anomaly detection model - summarised in a table below. 
 
 <img src="images/influencing_autoencoder.png" width="600" height="200" style="display: block; padding-bottom: 20px;" />
+
+At this stage, the accuracy of the autoencoder is not the primary objective but rather an exploratory step in understanding how well it distinguishes stylistic anomalies. To ensure that the model is accurate enough, we will need to work with a dataset mixed with a greater number of non-Pratchett-like texts, in order to measure its prediction accuracy. Since human verification will be required, this is left for future work.
 
 ---
 
