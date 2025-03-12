@@ -34,7 +34,7 @@ pyLDAvis is a handly interactive tool that is explored in this notebook that vis
 **anomaly_detection.ipynb**
 
 **Does the generated text meet Pratchett's original style of wit, irony and humour?**
-An excerpt from *Thud!* is extracted below, and we see Pratchett's unique humour and illustrativestyle of writing
+An excerpt from *Thud!* is extracted below, and we see Pratchett's unique humour and illustrative style of writing. Instead of 'Vimes disliked chess, he never understood it', we have a humourous text below with a jab at monarchy and a philosophical take on how if 'pawns' worked together, they could change the system.
 
 *"Vimes had never got on with any game much more complex than darts. Chess in particular had always annoyed him. It was the dumb way the pawns went off and slaughtered their fellow pawns while the kings lounged about doing nothing that always got to him; if only the pawns united, maybe talked the rooks round, the whole board could’ve been a republic in a dozen moves."*
 
