@@ -4,7 +4,7 @@ Terry Pratchett's passing in 2015 marked the loss of one of the greatest literar
 
 My project is driven by the belief that stories don’t end with their authors—they continue in the minds of those who love them. With **Retrieval-Augmented Generation (RAG)** and conversational AI, along with application of **LLM fine-tuning**, I aim to build a chatbot that can write and respond in Pratchett’s voice, capturing his style, humor, and philosophy. This isn’t about replacing his genius—because that’s impossible—but rather about exploring what it means to keep his stories alive.
 
-I hope to create a tool that doesn’t just mimic his words but understands the themes that made his work precious to us — the balance of cynicism and optimism, the sharp wit, the deep respect for stories and their power to move. If we could craft new adventures that feel true to his world, where Death still speaks in ALL CAPS, where wizards are gloriously incompetent, and where heroes (reluctant or otherwise) continue stumbling into history, it would be like a love letter to Pratchett's legacy.
+I hope to create a tool that doesn’t just mimic his words but understands the themes that made his work precious to us — the balance of cynicism and optimism, the sharp wit, the deep respect for stories and their power to move. If we could craft new adventures that feel true to his world, where Death still speaks in ALL CAPS, where wizards are gloriously incompetent, and where heroes (reluctant or otherwise) continue stumbling into history, it would be like a love letter to Pratchett's legacy. 
 
 Because, as Pratchett himself wrote:
 
@@ -13,7 +13,7 @@ Because, as Pratchett himself wrote:
 *“And what would humans be without love?" RARE, said Death. (Reaper Man)*
 
 ---
-*For copyright reasons, the books are not pushed to this repo.*
+*For copyright reasons, the books, text embeddings, and model weights are not pushed to this repo.*
 
 ### The first step - Exploring themes of Discworld through Topic Modeling
 
@@ -32,6 +32,11 @@ pyLDAvis is a handly interactive tool that is explored in this notebook that vis
 ### Anomaly Detection - Which is not like the others? Using an Autoencoder and Visualising Anomalies
 
 **anomaly_detection.ipynb**
+
+**Does the generated text meet Pratchett's original style of wit, irony and humour?**
+An excerpt from *Thud!* is extracted below, and we see Pratchett's unique humour and illustrativestyle of writing
+
+*"Vimes had never got on with any game much more complex than darts. Chess in particular had always annoyed him. It was the dumb way the pawns went off and slaughtered their fellow pawns while the kings lounged about doing nothing that always got to him; if only the pawns united, maybe talked the rooks round, the whole board could’ve been a republic in a dozen moves."*
 
 Autoencoders have been used in anomaly detection particularly in cases where anomalies are rare and difficult to label. We can consider using this as a means to differentiate generated text that is non-Pratchett-like, ensuring that our chatbot only generates Pratchett-like content.
 
