@@ -14,6 +14,7 @@ Because, as Pratchett himself wrote:
 
 ---
 *For copyright reasons, the books, text embeddings, and model weights are not pushed to this repo.*
+*This repo is an exploratory study, so the studies, techniques discussed here are not immediately the best and final ways to go about things..methods will be refined and more polished as time passes.*
 
 ### The first step - Exploring themes of Discworld through Topic Modeling
 
