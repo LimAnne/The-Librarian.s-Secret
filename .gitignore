@@ -4,6 +4,7 @@
 # Data/books
 *.pdf
 embeddings/
+*pratchett*
 
 # Models
 .huggingface/
