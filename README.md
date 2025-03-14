@@ -81,10 +81,10 @@ After running main.py, you should get an output that is similar to the image tha
 **With RAG**
 
 The LLM outputs a summary of the retrieved information about the luggage, which we know to be quite accurate, such as:
-- the physical appearance of the Luggage (large brassbound chest) :heavy_check_mark:
-- it being able to move around on hundreds of little legs. :heavy_check_mark:
-- Its homicidal nature and unexplained loyalty to Rincewind is also true. :heavy_check_mark:
-- The events described are also accurate :heavy_check_mark:
+- the physical appearance of the Luggage (large brassbound chest) :check_mark:
+- it being able to move around on hundreds of little legs. :check_mark:
+- Its homicidal nature and unexplained loyalty to Rincewind is also true. :check_mark:
+- The events described are also accurate :check_mark:
 
 **Without RAG**
 
@@ -101,7 +101,22 @@ These errors highlight the well-documented tendency of LLMs to hallucinate, gene
 ---
 ### 
 
-### LLM fine-tuning
-*llm fine-tuning is a work-in-progress, we should see updates very soon!*
+### LLM hybrid fine-tuning, using Retrieval-Augmented Fine-Tuning (RAFT)
+*This is still a work-in-progress. At this moment, we have imported scripts from the amazing repo* [RAFT - Gorilla Repository](https://github.com/ShishirPatil/gorilla/blob/main/raft/)
+*In the next days, we will be -pun-intended- fine-tuning the prompt-engineering methods so that it is applicable to our use-case.*
+
+In this exploration we will use RAFT - Retrieval-augmented Fine-tuning, which is a hybrid of using both RAG and fine-tuning techniques to enhance the generative responses from the LLM. 
+LLMs are well-known for their tendency to hallucinate. RAFT is able to incorporate knowledge from domain-specific documents during fine-tuning, while enabling the model to learn patterns from the source.
+
+Simply put, for example, when we generate new stories with the Luggage as a character, it should:
+- Exhibit its usual silent but highly expressive demeanor, using actions rather than speech to convey emotion. (It should not have any dialogue at all)
+- Demonstrate extreme loyalty to its owner, aggressively protecting him when necessary. (It should not be abandoning his owner in the face of danger)
+- Retain its distinct physical features as a brass-bound luggage on hundreds of legs. (It should not be made of sapphire-encrusted elephant hide, for example)
+- Following its owner on adventures (not any other random Discworld character)
+
+
+
+
+
 
 
