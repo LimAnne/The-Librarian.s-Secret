@@ -81,10 +81,10 @@ After running main.py, you should get an output that is similar to the image tha
 **With RAG**
 
 The LLM outputs a summary of the retrieved information about the luggage, which we know to be quite accurate, such as:
-- the physical appearance of the Luggage (large brassbound chest) :check_mark:
-- it being able to move around on hundreds of little legs. :check_mark:
-- Its homicidal nature and unexplained loyalty to Rincewind is also true. :check_mark:
-- The events described are also accurate :check_mark:
+- the physical appearance of the Luggage (large brassbound chest) ✅
+- it being able to move around on hundreds of little legs. ✅
+- Its homicidal nature and unexplained loyalty to Rincewind is also true. ✅
+- The events described are also accurate ✅
 
 **Without RAG**
 
